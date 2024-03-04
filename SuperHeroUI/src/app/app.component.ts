@@ -16,7 +16,8 @@ export class AppComponent {
   { }
 
   ngOnInit(): void {
-    this.heros = this.superHeroService.getSuperHeroes();   // get the hero data from the service and assign it to our variable
-    console.warn(this.heros);
+    this.superHeroService
+      .getSuperHeroes()
+      .subscribe((result: SuperHero[]) => (this.heros = result)); // get the data from the server and assign it to our local variable "heros
   }
 }
