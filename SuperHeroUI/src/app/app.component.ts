@@ -8,9 +8,10 @@ import { SuperHeroService } from './services/super-hero.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'SuperHeroUI';
 
-  heros: SuperHero[] = []; // initialiaze  an empty array of Heroes
+  title = 'SuperHero.UI';
+  heroes: SuperHero[] = []; // initialiaze  an empty array of Heroes
+  heroToEdit?: SuperHero;
 
   constructor(private superHeroService: SuperHeroService,) //inject superHero service 
   { }
@@ -18,6 +19,17 @@ export class AppComponent {
   ngOnInit(): void {
     this.superHeroService
       .getSuperHeroes()
-      .subscribe((result: SuperHero[]) => (this.heros = result)); // get the data from the server and assign it to our local variable "heros
+      .subscribe((result: SuperHero[]) => (this.heroes = result)); // get the data from the server and assign it to our local variable "heros
+  }
+
+  initNewHero() { 
+    this.heroToEdit = new SuperHero();
+  }
+  updateHeroList(heroes: SuperHero[]) {
+    this.heroes = heroes;
+  }
+
+  editHero(hero: SuperHero) { 
+    this.heroToEdit = hero;
   }
 }
